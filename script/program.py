@@ -3,6 +3,8 @@ import numpy as np
 from lifelines import CoxPHFitter
 import numpy.random as npr
 from scipy import stats
+import pickle
+
 
 # Qvals function
 def qvalues(p_values,pi_0_average):
@@ -72,13 +74,12 @@ for i in range(2,13476):
     coxdata = coxdata.append(cph.summary,ignore_index=False) # only append doesnt work
 
 # Store coxdata for presentation
-
+file_coxdata = open('../data/coxdata.obj', 'wb')
+pickle.dump(coxdata, file_coxdata)
     
     
 # Extract p-values
-
 p_vals = coxdata.loc[:,"p"]    
-
 
 
 # Evaluate pi0 for different lambdas
